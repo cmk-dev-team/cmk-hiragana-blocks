@@ -1,0 +1,22 @@
+{
+    "name": "cmk-hiragana-blocks",
+    "version": "1.0.0",
+    "description": "Hiragana custom blocks for Minecraft MakeCode junior courses",
+    "dependencies": {
+        "core": "*",
+        "builder": "*"
+    },
+    "files": [
+        "main.ts",
+        "README.md"
+    ],
+    "public": true,
+    "targetVersions": {
+        "target": "2.1.27",
+        "targetId": "minecraft"
+    },
+    "supportedTargets": [
+        "minecraft"
+    ],
+    "preferredEditor": "tsprj"
+}
