@@ -180,9 +180,21 @@ namespace hiraganaBlocks {
 //% color="#764BCC"
 //% weight=65
 namespace hiraganaMobs {
+    //% blockId=hiragana_minecraft_animal
+    //% block="いきもの $name"
+    //% name.fieldEditor="gridpicker"
+    //% name.fieldOptions.width=340 name.fieldOptions.columns=8 name.fieldOptions.tooltips=true
+    //% name.fieldOptions.maxRows="8"
+    //% name.fieldOptions.hideRect=true
+    //% shim=TD_ID
+    //% weight=90
+    export function animal(name: AnimalMob): number {
+        return name
+    }
+
     //% blockId=hiragana_mobs_spawn
-    //% block="いきもの $mob を $position に スポーンさせる"
-    //% mob.shadow=minecraftAnimal
+    //% block="$mob を $position に スポーンさせる"
+    //% mob.shadow=hiragana_minecraft_animal
     //% mob.defl=CHICKEN
     //% position.shadow=minecraftCreatePosition
     //% weight=100
