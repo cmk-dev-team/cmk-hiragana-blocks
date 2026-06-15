@@ -69,10 +69,21 @@ namespace hiragana {
     }
 
     /**
+     * プレイヤーからみた、そうたいのいちをつくります。
+     */
+    //% blockId=hiragana_relative_position
+    //% block="みぎ $right うえ $up まえ $forward の いち"
+    //% right.defl=0 up.defl=0 forward.defl=0
+    //% weight=65
+    export function relativePosition(right: number, up: number, forward: number): Position {
+        return pos(right, up, forward)
+    }
+
+    /**
      * エージェントにブロックをおかせます。
      */
     //% blockId=hiragana_agent_place
-    //% block="エージェントに $direction へ おかせる"
+    //% block="エージェントに $direction へ おく"
     //% weight=60
     export function placeAgent(direction: Direction): void {
         agent.place(toSixDirection(direction))
