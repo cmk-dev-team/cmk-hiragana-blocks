@@ -177,14 +177,6 @@ namespace hiraganaBlocks {
 }
 
 //% blockHidden=1
-namespace hiraganaMobs {
-    //% blockHidden=1
-    export function spawn(mob: number, position: Position): void {
-        mobs.spawn(mob, position)
-    }
-}
-
-//% blockHidden=1
 namespace hiragana {
     export enum Direction {
         Forward,
