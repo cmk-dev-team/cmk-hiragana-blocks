@@ -1,6 +1,7 @@
-//% block="ひらがな"
-//% color="#4b7bec"
-namespace hiragana {
+//% block="エージェント"
+//% color="#D83B01"
+//% weight=64
+namespace hiraganaAgent {
     export enum Direction {
         //% block="まえ"
         Forward,
@@ -69,17 +70,6 @@ namespace hiragana {
     }
 
     /**
-     * プレイヤーからみた、そうたいのいちをつくります。
-     */
-    //% blockId=hiragana_relative_position
-    //% block="みぎ $right うえ $up まえ $forward の いち"
-    //% right.defl=0 up.defl=0 forward.defl=0
-    //% weight=65
-    export function relativePosition(right: number, up: number, forward: number): Position {
-        return pos(right, up, forward)
-    }
-
-    /**
      * エージェントにブロックをおかせます。
      */
     //% blockId=hiragana_agent_place
@@ -118,5 +108,78 @@ namespace hiragana {
             default:
                 return FORWARD
         }
+    }
+}
+
+//% block="ポジション"
+//% color="#69B090"
+//% weight=55
+namespace hiraganaPositions {
+    /**
+     * プレイヤーからみた、そうたいのいちをつくります。
+     */
+    //% blockId=hiragana_relative_position
+    //% block="みぎ $right うえ $up まえ $forward の いち"
+    //% right.defl=0 up.defl=0 forward.defl=0
+    //% weight=100
+    export function relativePosition(right: number, up: number, forward: number): Position {
+        return pos(right, up, forward)
+    }
+}
+
+//% blockHidden=1
+namespace hiragana {
+    export enum Direction {
+        Forward,
+        Back,
+        Left,
+        Right,
+        Up,
+        Down
+    }
+
+    export enum TurnDirection {
+        Left,
+        Right
+    }
+
+    //% blockHidden=1
+    export function callAgent(): void {
+        hiraganaAgent.callAgent()
+    }
+
+    //% blockHidden=1
+    export function moveAgent(direction: Direction, distance: number): void {
+        hiraganaAgent.moveAgent(direction as number, distance)
+    }
+
+    //% blockHidden=1
+    export function moveAgentForward(distance: number): void {
+        hiraganaAgent.moveAgent(hiraganaAgent.Direction.Forward, distance)
+    }
+
+    //% blockHidden=1
+    export function turnAgent(direction: TurnDirection): void {
+        hiraganaAgent.turnAgent(direction as number)
+    }
+
+    //% blockHidden=1
+    export function agentPosition(): Position {
+        return hiraganaAgent.agentPosition()
+    }
+
+    //% blockHidden=1
+    export function relativePosition(right: number, up: number, forward: number): Position {
+        return hiraganaPositions.relativePosition(right, up, forward)
+    }
+
+    //% blockHidden=1
+    export function placeAgent(direction: Direction): void {
+        hiraganaAgent.placeAgent(direction as number)
+    }
+
+    //% blockHidden=1
+    export function setAgentItem(blockType: number, count: number, slot: number): void {
+        hiraganaAgent.setAgentItem(blockType, count, slot)
     }
 }
