@@ -1,6 +1,6 @@
 {
-    "name": "cmk-hiragana-blocks",
-    "version": "1.0.1",
+    "name": "hiragana",
+    "version": "1.0.2",
     "description": "Hiragana custom blocks for Minecraft MakeCode junior courses",
     "dependencies": {
         "core": "*",
