@@ -176,10 +176,7 @@ namespace hiraganaBlocks {
     }
 }
 
-//% block="モブ"
-//% color="#764BCC"
-//% weight=65
-namespace hiraganaMobs {
+namespace mobs {
     //% blockId=hiragana_minecraft_animal
     //% block="いきもの $name"
     //% name.fieldEditor="gridpicker"
@@ -187,8 +184,8 @@ namespace hiraganaMobs {
     //% name.fieldOptions.maxRows="8"
     //% name.fieldOptions.hideRect=true
     //% shim=TD_ID
-    //% weight=90
-    export function animal(name: AnimalMob): number {
+    //% blockHidden=1
+    export function hiraganaAnimal(name: AnimalMob): number {
         return name
     }
 
@@ -198,8 +195,16 @@ namespace hiraganaMobs {
     //% mob.defl=CHICKEN
     //% position.shadow=minecraftCreatePosition
     //% weight=100
+    export function hiraganaSpawn(mob: number, position: Position): void {
+        spawn(mob, position)
+    }
+}
+
+//% blockHidden=1
+namespace hiraganaMobs {
+    //% blockHidden=1
     export function spawn(mob: number, position: Position): void {
-        mobs.spawn(mob, position)
+        mobs.hiraganaSpawn(mob, position)
     }
 }
 
