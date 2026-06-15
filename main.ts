@@ -125,6 +125,17 @@ namespace hiraganaPositions {
     export function relativePosition(right: number, up: number, forward: number): Position {
         return pos(right, up, forward)
     }
+
+    /**
+     * ワールドのぜったいざひょうをつくります。
+     */
+    //% blockId=hiragana_world_position
+    //% block="ワールド $x $y $z"
+    //% x.defl=0 y.defl=0 z.defl=0
+    //% weight=90
+    export function worldPosition(x: number, y: number, z: number): Position {
+        return world(x, y, z)
+    }
 }
 
 //% block="プレイヤー"
@@ -139,6 +150,14 @@ namespace hiraganaPlayer {
         player.onChat(command, function () {
             handler()
         })
+    }
+
+    //% blockId=hiragana_player_teleport
+    //% block="プレイヤーを $position に テレポートさせる"
+    //% position.shadow=minecraftCreatePosition
+    //% weight=90
+    export function teleport(position: Position): void {
+        player.teleport(position)
     }
 }
 
@@ -162,7 +181,7 @@ namespace hiraganaBlocks {
 //% weight=65
 namespace hiraganaMobs {
     //% blockId=hiragana_mobs_spawn
-    //% block="$mob を $position に スポーンさせる"
+    //% block="いきもの $mob を $position に スポーンさせる"
     //% mob.shadow=minecraftAnimal
     //% mob.defl=CHICKEN
     //% position.shadow=minecraftCreatePosition
