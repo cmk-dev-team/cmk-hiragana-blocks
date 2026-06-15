@@ -127,6 +127,51 @@ namespace hiraganaPositions {
     }
 }
 
+//% block="プレイヤー"
+//% color="#0078D7"
+//% weight=100
+namespace hiraganaPlayer {
+    //% blockId=hiragana_player_on_chat
+    //% block="チャットコマンド $command を にゅうりょくしたとき"
+    //% command.defl="run"
+    //% weight=100
+    export function onChat(command: string, handler: () => void): void {
+        player.onChat(command, function () {
+            handler()
+        })
+    }
+}
+
+//% block="ブロック"
+//% color="#7ABB55"
+//% weight=70
+namespace hiraganaBlocks {
+    //% blockId=hiragana_blocks_place
+    //% block="$blockType を $position に おく"
+    //% blockType.shadow=minecraftBlock
+    //% blockType.defl=Block.Grass
+    //% position.shadow=minecraftCreatePosition
+    //% weight=100
+    export function place(blockType: number, position: Position): void {
+        blocks.place(blockType, position)
+    }
+}
+
+//% block="モブ"
+//% color="#764BCC"
+//% weight=65
+namespace hiraganaMobs {
+    //% blockId=hiragana_mobs_spawn
+    //% block="$mob を $position に スポーンさせる"
+    //% mob.shadow=minecraftAnimal
+    //% mob.defl=CHICKEN
+    //% position.shadow=minecraftCreatePosition
+    //% weight=100
+    export function spawn(mob: number, position: Position): void {
+        mobs.spawn(mob, position)
+    }
+}
+
 //% blockHidden=1
 namespace hiragana {
     export enum Direction {
