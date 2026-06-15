@@ -1,0 +1,4 @@
+{
+    "mobs.animal|block": "いきもの %name",
+    "mobs.spawn|block": "%entity=minecraftAnimal|を %destination=minecraftCreatePosition|に スポーンさせる"
+}
