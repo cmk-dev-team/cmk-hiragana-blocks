@@ -51,7 +51,7 @@ namespace hiraganaShare {
     let pending: Pending[] = []
     let traceScheduled = false
     // 送る内容に入れる版。先生の画面に出るので、子どもが古い版を開いていても気づける
-    const VERSION = "1.8.0-dev4"
+    const VERSION = "1.8.0-dev5"
 
     export function isExecuting(): boolean {
         return executing
