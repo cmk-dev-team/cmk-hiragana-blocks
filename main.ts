@@ -159,6 +159,34 @@ namespace hiraganaPlayer {
     export function teleport(position: Position): void {
         player.teleport(position)
     }
+
+    /**
+     * チュートリアルの template 専用。見た目は onChat と同じで、ブロック置き場には出さない。
+     */
+    //% blockId=hiragana_player_on_chat_template
+    //% block="チャットコマンド $command を にゅうりょくしたとき"
+    //% blockHidden=1
+    export function onChatTemplate(command: string, handler: () => void): void {
+        player.onChat(command, function () {
+            handler()
+        })
+    }
+}
+
+//% block="くりかえし"
+//% color="#569138"
+//% weight=60
+namespace hiraganaLoops {
+    //% blockId=hiragana_loops_repeat
+    //% block="$count かい くりかえす"
+    //% count.defl=4
+    //% handlerStatement=1
+    //% weight=100
+    export function repeat(count: number, handler: () => void): void {
+        for (let i = 0; i < count; i++) {
+            handler()
+        }
+    }
 }
 
 //% block="ブロック"
