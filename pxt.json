@@ -20,5 +20,29 @@
     "supportedTargets": [
         "minecraft"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "tsprj",
+    "toolboxFilter": {
+        "namespaces": {
+            "player": "hidden",
+            "blocks": "hidden",
+            "mobs": "hidden",
+            "agent": "hidden",
+            "gameplay": "hidden",
+            "positions": "hidden",
+            "builder": "hidden",
+            "shapes": "hidden",
+            "events": "hidden",
+            "exploration": "hidden",
+            "user": "hidden",
+            "file": "hidden",
+            "loops": "hidden",
+            "logic": "hidden",
+            "Math": "hidden",
+            "Text": "hidden",
+            "Array": "hidden",
+            "arrays": "hidden",
+            "text": "hidden",
+            "functions": "hidden"
+        }
+    }
 }
