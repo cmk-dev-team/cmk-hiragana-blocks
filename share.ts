@@ -50,6 +50,8 @@ namespace hiraganaShare {
     let lastPos = ""
     let pending: Pending[] = []
     let traceScheduled = false
+    // 送る内容に入れる版。先生の画面に出るので、子どもが古い版を開いていても気づける
+    const VERSION = "1.8.0-dev3"
 
     export function isExecuting(): boolean {
         return executing
@@ -195,7 +197,7 @@ namespace hiraganaShare {
         recording = false
         executing = true
         send("{\"command\":" + q(command) + ",\"mode\":" + q(doExecute ? "run" : "trace")
-            + ",\"style\":\"hiragana\",\"program\":" + list(program) + "}")
+            + ",\"style\":\"hiragana\",\"ver\":" + q(VERSION) + ",\"program\":" + list(program) + "}")
     }
 
     /** チャットコマンドの入口。起動の約2秒後になぞって送り、実行したときは動かして送る */
