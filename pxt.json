@@ -1,6 +1,6 @@
 {
     "name": "hiragana",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "description": "Hiragana custom blocks for Minecraft MakeCode junior courses",
     "dependencies": {
         "core": "*",
@@ -8,6 +8,7 @@
     },
     "files": [
         "main.ts",
+        "share.ts",
         "README.md",
         "_locales/ja/hiragana-strings.json"
     ],

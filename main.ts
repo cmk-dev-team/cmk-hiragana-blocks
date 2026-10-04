@@ -31,7 +31,8 @@ namespace hiraganaAgent {
     //% block="エージェントを よぶ"
     //% weight=100
     export function callAgent(): void {
-        agent.teleportToPlayer()
+        if (hiraganaShare.isExecuting()) agent.teleportToPlayer()
+        hiraganaShare.callAgent()
     }
 
     /**
@@ -42,7 +43,8 @@ namespace hiraganaAgent {
     //% distance.min=1 distance.defl=1
     //% weight=90
     export function moveAgent(direction: Direction, distance: number): void {
-        agent.move(toSixDirection(direction), distance)
+        if (hiraganaShare.isExecuting()) agent.move(toSixDirection(direction), distance)
+        hiraganaShare.move(dirText(direction), distance)
     }
 
     /**
@@ -52,6 +54,8 @@ namespace hiraganaAgent {
     //% block="エージェントの むきを $direction に かえる"
     //% weight=80
     export function turnAgent(direction: TurnDirection): void {
+        hiraganaShare.turn(direction == TurnDirection.Left ? "left" : "right")
+        if (!hiraganaShare.isExecuting()) return
         if (direction == TurnDirection.Left) {
             agent.turn(LEFT_TURN)
         } else {
@@ -66,6 +70,7 @@ namespace hiraganaAgent {
     //% block="エージェントの いち"
     //% weight=70
     export function agentPosition(): Position {
+        hiraganaShare.notePos("エージェントの いち")
         return agent.getPosition()
     }
 
@@ -76,7 +81,8 @@ namespace hiraganaAgent {
     //% block="エージェントに $direction へ おく"
     //% weight=60
     export function placeAgent(direction: Direction): void {
-        agent.place(toSixDirection(direction))
+        if (hiraganaShare.isExecuting()) agent.place(toSixDirection(direction))
+        hiraganaShare.place(dirText(direction))
     }
 
     /**
@@ -90,7 +96,19 @@ namespace hiraganaAgent {
     //% slot.min=1 slot.max=27 slot.defl=1
     //% weight=50
     export function setAgentItem(blockType: number, count: number, slot: number): void {
-        agent.setItem(blockType, count, slot)
+        if (hiraganaShare.isExecuting()) agent.setItem(blockType, count, slot)
+        hiraganaShare.setItem(blockType, count, slot)
+    }
+
+    function dirText(direction: Direction): string {
+        switch (direction) {
+            case Direction.Back: return "back"
+            case Direction.Left: return "left"
+            case Direction.Right: return "right"
+            case Direction.Up: return "up"
+            case Direction.Down: return "down"
+            default: return "forward"
+        }
     }
 
     function toSixDirection(direction: Direction) {
@@ -123,6 +141,7 @@ namespace hiraganaPositions {
     //% right.defl=0 up.defl=0 forward.defl=0
     //% weight=100
     export function relativePosition(right: number, up: number, forward: number): Position {
+        hiraganaShare.notePos("みぎ " + right + " うえ " + up + " まえ " + forward)
         return pos(right, up, forward)
     }
 
@@ -134,6 +153,7 @@ namespace hiraganaPositions {
     //% x.defl=0 y.defl=0 z.defl=0
     //% weight=90
     export function worldPosition(x: number, y: number, z: number): Position {
+        hiraganaShare.notePos("ワールド " + x + " " + y + " " + z)
         return world(x, y, z)
     }
 }
@@ -147,9 +167,7 @@ namespace hiraganaPlayer {
     //% command.defl="run"
     //% weight=100
     export function onChat(command: string, handler: () => void): void {
-        player.onChat(command, function () {
-            handler()
-        })
+        hiraganaShare.onChat(command, handler)
     }
 
     //% blockId=hiragana_player_teleport
@@ -157,7 +175,8 @@ namespace hiraganaPlayer {
     //% position.shadow=minecraftCreatePosition
     //% weight=90
     export function teleport(position: Position): void {
-        player.teleport(position)
+        if (hiraganaShare.isExecuting()) player.teleport(position)
+        hiraganaShare.teleport(position)
     }
 
     /**
@@ -167,9 +186,7 @@ namespace hiraganaPlayer {
     //% block="チャットコマンド $command を にゅうりょくしたとき"
     //% blockHidden=1
     export function onChatTemplate(command: string, handler: () => void): void {
-        player.onChat(command, function () {
-            handler()
-        })
+        hiraganaShare.onChat(command, handler)
     }
 }
 
@@ -183,9 +200,7 @@ namespace hiraganaLoops {
     //% handlerStatement=1
     //% weight=100
     export function repeat(count: number, handler: () => void): void {
-        for (let i = 0; i < count; i++) {
-            handler()
-        }
+        hiraganaShare.repeat(count, handler)
     }
 }
 
@@ -200,7 +215,26 @@ namespace hiraganaBlocks {
     //% position.shadow=minecraftCreatePosition
     //% weight=100
     export function place(blockType: number, position: Position): void {
-        blocks.place(blockType, position)
+        if (hiraganaShare.isExecuting()) blocks.place(blockType, position)
+        hiraganaShare.placeAt(blockType, position)
+    }
+}
+
+//% block="いきもの"
+//% color="#764BCC"
+//% weight=65
+namespace hiraganaMobs {
+    /**
+     * いきものを スポーンさせます。なぞるときは出さずに記録だけする。
+     */
+    //% blockId=hiragana_mobs_spawn
+    //% block="$mob を $position に スポーンさせる"
+    //% mob.shadow=minecraftAnimal
+    //% position.shadow=minecraftCreatePosition
+    //% weight=100
+    export function spawn(mob: number, position: Position): void {
+        if (hiraganaShare.isExecuting()) mobs.spawn(mob, position)
+        hiraganaShare.spawn(mob, position)
     }
 }
 
