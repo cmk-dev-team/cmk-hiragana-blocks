@@ -181,10 +181,12 @@ namespace hiraganaPlayer {
 
     /**
      * チュートリアルの template 専用。見た目は onChat と同じで、ブロック置き場には出さない。
+     * 置き場に出ないので、捨てると戻せない。だから捨てられないようにする（undeletable）。
      */
     //% blockId=hiragana_player_on_chat_template
     //% block="チャットコマンド $command を にゅうりょくしたとき"
     //% blockHidden=1
+    //% undeletable=1
     export function onChatTemplate(command: string, handler: () => void): void {
         hiraganaShare.onChat(command, handler)
     }
